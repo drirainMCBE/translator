@@ -15,8 +15,8 @@ class Translater{
         $resourcePath = $resourceDirectory . "resources/messages";
         $dataPath = $dataDirectory . "messages/";
 
-        if(/*!mkdir($dataPath) && */!is_dir($dataPath)){
-            throw new \RuntimeException(sprintf('Directory "%s" was not created', $dataPath));
+        if(!is_dir($dataPath)){
+            mkdir($dataPath);
         }
         $dir = opendir($resourcePath);
 
