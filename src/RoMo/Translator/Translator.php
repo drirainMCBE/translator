@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RoMo\translator;
+namespace RoMo\Translator;
 
 use pocketmine\plugin\Plugin;
 
