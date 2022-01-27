@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace RoMo\Translater;
+namespace RoMo\translator;
 
 use pocketmine\plugin\Plugin;
 
-class Translater{
+class Translator{
 
     /** @var array */
     protected array $data;

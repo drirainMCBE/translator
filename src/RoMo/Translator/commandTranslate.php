@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RoMo\Translater;
+namespace RoMo\Translator;
 
 class commandTranslate{
 
