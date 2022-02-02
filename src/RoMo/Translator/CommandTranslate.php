@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RoMo\Translator;
 
-class commandTranslate{
+class CommandTranslate{
 
     /** @var string */
     private string $name;

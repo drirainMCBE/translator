@@ -58,7 +58,7 @@ class Translator{
         return $this->getPrefix() . $this->getTranslate($id, $parameters);
     }
 
-    public function getCmd($id) : commandTranslate{
+    public function getCmd($id) : CommandTranslate{
         $commandId = "command.$id";
 
         $commandName = $this->data[$commandId . ".name"] ?? $id;
@@ -74,6 +74,6 @@ class Translator{
             $count++;
         }
 
-        return new commandTranslate($commandName, $commandDescription, $commandUsageMessage, $aliases);
+        return new CommandTranslate($commandName, $commandDescription, $commandUsageMessage, $aliases);
     }
 }
