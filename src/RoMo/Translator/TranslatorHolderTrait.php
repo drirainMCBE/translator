@@ -6,20 +6,20 @@ namespace RoMo\Translator;
 
 trait TranslatorHolderTrait{
 
-    private Translator $translator;
+    private static Translator $translator;
 
     /**
      * @return Translator
      */
-    public function getTranslator() : translator{
-        return $this->translator;
+    public static function getTranslator() : translator{
+        return self::$translator;
     }
 
     /**
      * @param translator $translator
      */
-    public function setTranslator(Translator $translator) : void{
-        $this->translator = $translator;
+    public static function setTranslator(Translator $translator) : void{
+        self::$translator = $translator;
     }
 
 }
