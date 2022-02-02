@@ -23,8 +23,8 @@ class Translator{
         while(($read = readdir($dir))){
             if($read !== "." && $read !== ".."){
                 if(!file_exists($dataPath . "/" . $read) || $isDev){
-                $messageFile = $resourcePath . "/" . $read;
-                copy($messageFile, $dataPath . "/" . $read);
+                    $messageFile = $resourcePath . "/" . $read;
+                    copy($messageFile, $dataPath . "/" . $read);
                 }
             }
         }
@@ -63,17 +63,39 @@ class Translator{
 
         $commandName = $this->data[$commandId . ".name"] ?? $id;
         $commandDescription = $this->data[$commandId . ".description"] ?? $id;
-        $commandUsageMessage = $this->data[$commandId . ".usageMessage"] ?? $id;
 
-        $aliases = [];
-
+        //파라미터 로드
+        $parameters = [];
         $count = 1;
-
-        while(isset($this->data[($commandid_count = $commandId . ".aliases.$count")])){
-            $aliases[] = $this->data[$commandid_count];
+        while(isset($this->data[($commandIdCount = $commandId . ".parameter." . $count)])){
+            $name = $this->data[$commandIdCount];
+            $type = $this->data[$commandIdCount . ".type"] ?? "";
+            $options = [];
+            $optionCount = 1;
+            while(isset($this->data[($commandIdOptionCount = $commandIdCount . ".option." . $optionCount)])){
+                $options[] = $this->data[$commandIdOptionCount];
+                $optionCount++;
+            }
+            $parameters[$count] = new CommandParameterTranslate($name, $type, $options);
             $count++;
         }
 
-        return new commandTranslate($commandName, $commandDescription, $commandUsageMessage, $aliases);
+        //사용법 로드
+        $usages = [];
+        $count = 1;
+        while(isset($this->data[($commandIdCount = $commandId . ".usageMessage." . $count)])){
+            $usages[$count] = $this->data[$commandIdCount];
+            $count++;
+        }
+
+        //별명 로드
+        $aliases = [];
+        $count = 1;
+        while(isset($this->data[($commandIdCount = $commandId . ".aliases." . $count)])){
+            $aliases[] = $this->data[$commandIdCount];
+            $count++;
+        }
+
+        return new CommandTranslate($commandName, $parameters, $commandDescription, $usages, $aliases);
     }
 }
