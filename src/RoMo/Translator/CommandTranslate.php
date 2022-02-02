@@ -4,25 +4,20 @@ declare(strict_types=1);
 
 namespace RoMo\Translator;
 
-class CommandTranslate{
+class commandTranslate{
 
     /** @var string */
     private string $name;
     private string $description;
+    private string $usage;
 
-    /** @var CommandParameterTranslate[] */
-    private array $parameters;
-
-    /** @var string[] */
-    private array $usages;
+    /** @var array */
     private array $aliases;
 
-    public function __construct(string $name, array $parameters, string $description, array $usages, array $aliases){
+    public function __construct(string $name, string $description, string $usage, array $aliases){
         $this->name = $name;
-        var_dump($parameters);
-        $this->parameters = $parameters;
         $this->description = $description;
-        $this->usages = $usages;
+        $this->usage = $usage;
         $this->aliases = $aliases;
     }
 
@@ -34,24 +29,6 @@ class CommandTranslate{
     }
 
     /**
-     * @return CommandParameterTranslate[]
-     */
-    public function getAllParameters() : array{
-        return $this->parameters;
-    }
-
-    /**
-     * @param int $id
-     * @return CommandParameterTranslate
-     */
-    public function getParameter(int $id) : CommandParameterTranslate{
-        if(!isset($this->parameters[$id])){
-            return new CommandParameterTranslate("command." . $this->getName() . ".parameter." . $id, "", []);
-        }
-        return $this->parameters[$id];
-    }
-
-    /**
      * @return string
      */
     public function getDescription() : string{
@@ -59,10 +36,10 @@ class CommandTranslate{
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getUsages() : array{
-        return $this->usages;
+    public function getUsage() : string{
+        return $this->usage;
     }
 
     /**
