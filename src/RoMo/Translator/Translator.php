@@ -30,6 +30,9 @@ class Translator{
         }
 
         $this->data = parse_ini_file($dataPath . $language . ".ini", false);
+        foreach($this->data as $key => $value){
+            $this->data[$key] = str_replace("(enter)", "\n", $value);
+        }
     }
 
     public function getPrefix() : string{
